@@ -33,17 +33,7 @@ public class Robot extends TimedRobot {
   XboxController m_driver = new XboxController(0);
   XboxController m_operator = new XboxController(1);
 
-  static final int DRIVE_CURRENT_LIMIT_A = 60;
-  static final int FEEDER_CURRENT_LIMIT_A = 60;
-  static final double FEEDER_OUT_SPEED = 1.0;
-  static final double FEEDER_IN_SPEED = -.4;
-  static final double FEEDER_AMP_SPEED = .4;
-  static final int LAUNCHER_CURRENT_LIMIT_A = 60;
   static final double LAUNCHER_SPEED = 1.0;
-  static final double LAUNCHER_AMP_SPEED = .17;
-  static final double CLAW_OUTPUT_POWER = .5;
-  static final double CLAW_STALL_POWER = .1;
-  static final double CLIMER_OUTPUT_POWER = 1;
 
   @Override
   public void robotInit() {
@@ -64,7 +54,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    SmartDashboard.putNumber("Time (seconds)", Timer.getFPGATimestamp());
+    SmartDashboard.putNumber("Time(s)", Timer.getFPGATimestamp());
   }
 
   double AUTO_LAUNCH_DELAY_S;
@@ -106,11 +96,11 @@ public class Robot extends TimedRobot {
         // stop launch
         // m_launcher.setSpeed(0);
       } else if (time < AUTO_DRIVE_DELAY_S + AUTO_DRIVE_TIME_S) {
-        // drive
+        // drive backwards (figure out + or -)
         //speed = -0.5
         m_drivetrain.arcadeDrive(AUTO_DRIVE_SPEED, 0);
       } else {
-        // stop drive
+        // stop drive and stop any kind of motor
         m_drivetrain.arcadeDrive(0, 0);
       }
 //its a 2NOTES
